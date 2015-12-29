@@ -96,7 +96,7 @@ func combineSms() {
 		content := strings.Join(contentArr, ",,")
 
 		first := arr[0].Content
-		t := strings.Split(first, "][")
+		t := strings.Split(first, "}{")
 		eg := ""
 		if len(t) >= 3 {
 			eg = t[2]
@@ -105,11 +105,11 @@ func combineSms() {
 		path, err := api.LinkToSMS(content)
 		sms := ""
 		if err != nil || path == "" {
-			sms = fmt.Sprintf("[P%d][%s] %d %s.  e.g. %s detail in email", arr[0].Priority, arr[0].Status, size, arr[0].Metric, eg)
+			sms = fmt.Sprintf("{P%d}{%s} %d %s.  e.g. %s detail in email", arr[0].Priority, arr[0].Status, size, arr[0].Metric, eg)
 			log.Println("get link fail", err)
 		} else {
 			links := g.Config().Api.Links
-			sms = fmt.Sprintf("[P%d][%s] %d %s e.g. %s %s/%s ", arr[0].Priority, arr[0].Status, size, arr[0].Metric, eg, links, path)
+			sms = fmt.Sprintf("{P%d}{%s} %d %s e.g. %s %s/%s ", arr[0].Priority, arr[0].Status, size, arr[0].Metric, eg, links, path)
 		}
 
 		redi.WriteSms([]string{arr[0].Phone}, sms)

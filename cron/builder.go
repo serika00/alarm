@@ -9,7 +9,7 @@ import (
 
 func BuildCommonSMSContent(event *model.Event) string {
 	return fmt.Sprintf(
-		"[P%d][%s][%s][][%s %s %s %s %s%s%s][O%d %s]",
+		"{P%d}{%s}{%s}{}{%s %s %s %s %s%s%s}{O%d %s}",
 		event.Priority(),
 		event.Status,
 		event.Endpoint,
